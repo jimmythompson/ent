@@ -16,7 +16,6 @@
     "less": "^2.5.0"
   },
   "scripts": {
-    "build_css": "lessc src/style/main.less > build/style.css",
     "start": "electron . 2>&1"
   }
 }
