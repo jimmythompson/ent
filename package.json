@@ -2,13 +2,21 @@
   "name": "ent",
   "description": "an attack tree generator and visualiser",
   "version": "0.1.0",
-  "main": "main.js",
+  "main": "build/main.js",
+  "dependencies": {
+    "d3": "^3.5.5"
+  },
   "devDependencies": {
     "electron-packager": "^3.3.0",
     "electron-prebuilt": "^0.25.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-shell": "^1.1.2",
     "less": "^2.5.0"
   },
   "scripts": {
+    "build_css": "lessc src/style/main.less > build/style.css",
     "start": "electron . 2>&1"
   }
 }
