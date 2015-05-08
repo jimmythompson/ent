@@ -1,0 +1,14 @@
+{
+  "name": "ent",
+  "description": "an attack tree generator and visualiser",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "electron-packager": "^3.3.0",
+    "electron-prebuilt": "^0.25.2",
+    "less": "^2.5.0"
+  },
+  "scripts": {
+    "start": "electron . 2>&1"
+  }
+}
