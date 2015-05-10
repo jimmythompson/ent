@@ -10,11 +10,6 @@ var textToLines = function (text) {
     return text.split("\n");
 };
 
-var node = function (name, children) {
-    children = typeof children !== 'undefined' ? children : [];
-    return { name: name, children: children };
-};
-
 var parseLine = function (line) {
     parsed = expression.exec(line).captures;
 
@@ -37,16 +32,11 @@ module.exports = {
     parse: function (text) {
         var lines = textToLines(text);
 
-        var root = {
-            name: lines[0],
-            depth: 0,
-            parent: null,
-            children: []
-        };
-
         if (!text) {
-            return deepConvert(root);
+            return {name: "", children: []};
         }
+
+        var root = parseLine(lines[0]);
 
         lines.slice(1).reduce(function (previous, current) {
             parsed = parseLine(current);
