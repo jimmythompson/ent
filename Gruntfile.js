@@ -42,9 +42,8 @@ module.exports = function (grunt) {
             vendor: {
                 files: [{
                     expand: true,
-                    flatten: true,
                     src: ['vendor/**'],
-                    dest: 'build/vendor'
+                    dest: 'build'
                 }]
             }
         },

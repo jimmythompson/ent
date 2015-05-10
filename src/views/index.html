@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World!</title>
+    <title>Ent - Attack Tree Generator</title>
+    <link type="text/css" rel="stylesheet" href="../vendor/skeleton/normalize.css"/>
+    <link type="text/css" rel="stylesheet" href="../vendor/skeleton/skeleton.css"/>
     <link type="text/css" rel="stylesheet" href="../style.css"/>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <textarea id="text-area" name="textual" rows="15" cols="80">Open Safe
+    <div class="sidebar">
+        <textarea id="text-area" name="textual">
+Open Safe
 = Pick Lock
 = Learn Combo
-== Find Written Combo
-== Get Combo From Target
-=== Threaten
-=== Blackmail
-=== Eavesdrop (AND)
-==== Listen to Conversation
-==== Get Target to State Combo
-= Cut Open Safe
-= Install Improperly</textarea>
-    <button id="generate">Generate</button>
-    <hr/>
+        </textarea>
+        <button id="generate" class="button-primary">Generate</button>
+    </div>
     <div id="content"></div>
-    <script type="application/javascript" src="../vendor/d3.min.js"></script>
-    <script type="application/javascript" src="../image_generator.js"></script>
+    <script type="text/javascript" src="../vendor/d3/d3.min.js"></script>
+    <script type="text/javascript" src="../image_generator.js"></script>
 </body>
 </html>
