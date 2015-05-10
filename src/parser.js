@@ -10,10 +10,6 @@ var textToLines = function (text) {
     return text.split("\n");
 };
 
-var intermediate = function (name, parent) {
-    return { name: name, parent: parent }
-};
-
 var node = function (name, children) {
     children = typeof children !== 'undefined' ? children : [];
     return { name: name, children: children };
@@ -24,19 +20,55 @@ var parseLine = function (line) {
 
     return {
         name: parsed.name[0],
-        depth: parsed.depth[0].length
+        depth: parsed.depth[0].length,
+        parent: null,
+        children: []
+    };
+};
+
+var deepConvert = function (node) {
+    return converted = {
+        name: node.name,
+        children: node.children.map(deepConvert)
     };
 };
 
 module.exports = {
     parse: function (text) {
-        lines = textToLines(text);
-        root = node(lines[0]);
+        var lines = textToLines(text);
+
+        var root = {
+            name: lines[0],
+            depth: 0,
+            parent: null,
+            children: []
+        };
 
         if (!text) {
-            return root;
+            return deepConvert(root);
         }
 
-        return root;
+        lines.slice(1).reduce(function (previous, current) {
+            parsed = parseLine(current);
+
+            if (parsed.depth > previous.depth) {
+                parsed.parent = previous;
+                previous.children.push(parsed);
+            } else {
+                var actualParent = previous.parent;
+
+                var backjump = previous.depth - parsed.depth;
+                for (var i = 0; i < backjump; i++) {
+                    actualParent = actualParent.parent;
+                }
+
+                parsed.parent = actualParent;
+                actualParent.children.push(parsed);
+            }
+
+            return parsed;
+        }, root);
+
+        return deepConvert(root);
     }
 };
