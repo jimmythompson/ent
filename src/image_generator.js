@@ -4,9 +4,9 @@ document.getElementById("generate").addEventListener('click', function () {
     var root = parser.parse(
         document.getElementById("text-area").value);
 
-    var margin = { "top": 20, "right": 40, "bottom": 40, "left": 20 };
-    var width = 1000 - margin.left - margin.right;
-    var height =  1000 - margin.top - margin.bottom;
+    var margin = { "top": 10, "right": 10, "bottom": 10, "left": 10 };
+    var width = window.innerWidth - (margin.left + margin.right);
+    var height =  window.innerHeight - (margin.top + margin.bottom);
     var rectWidth = 150;
     var rectHeight = rectWidth / 2;
     var rectRounding = 8;
@@ -16,10 +16,10 @@ document.getElementById("generate").addEventListener('click', function () {
 
     var svg = d3.select(document.getElementById("content"))
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width)
+        .attr("height", height)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + width / 3 + "," + margin.top + ")");
 
     var conjunctions = function(nodes) {
         var out = [];
@@ -32,7 +32,8 @@ document.getElementById("generate").addEventListener('click', function () {
     };
 
     var tree = d3.layout.tree()
-        .size([width, height]);
+        .size([width, height])
+        .nodeSize([rectWidth + 10, rectHeight + rectHeight / 5]);
     var nodes = tree.nodes(root);
     var links = tree.links(nodes);
     var joins = conjunctions(nodes);
