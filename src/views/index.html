@@ -5,11 +5,23 @@
     <link type="text/css" rel="stylesheet" href="../style.css"/>
 </head>
 <body>
-    <script type="application/javascript" src="../../node_modules/d3/d3.min.js"></script>
     <h1>Hello World!</h1>
-    <p>
-        We are using io.js <script>document.write(process.version)</script>
-        and Electron <script>document.write(process.versions['electron'])</script>.
-    </p>
+    <textarea id="text-area" name="textual" rows="15" cols="80">Open Safe
+= Pick Lock
+= Learn Combo
+== Find Written Combo
+== Get Combo From Target
+=== Threaten
+=== Blackmail
+=== Eavesdrop (AND)
+==== Listen to Conversation
+==== Get Target to State Combo
+= Cut Open Safe
+= Install Improperly</textarea>
+    <button id="generate">Generate</button>
+    <hr/>
+    <div id="content"></div>
+    <script type="application/javascript" src="../vendor/d3.min.js"></script>
+    <script type="application/javascript" src="../image_generator.js"></script>
 </body>
 </html>

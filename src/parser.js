@@ -27,7 +27,7 @@ var parseLine = function (line) {
 };
 
 var deepConvert = function (node) {
-    return converted = {
+    return {
         name: node.name,
         children: node.children.map(deepConvert)
     };
@@ -56,9 +56,9 @@ module.exports = {
                 previous.children.push(parsed);
             } else {
                 var actualParent = previous.parent;
+                var howFarToJump = previous.depth - parsed.depth;
 
-                var backjump = previous.depth - parsed.depth;
-                for (var i = 0; i < backjump; i++) {
+                for (var i = 0; i < howFarToJump; i++) {
                     actualParent = actualParent.parent;
                 }
 

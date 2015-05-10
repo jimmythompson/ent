@@ -38,6 +38,14 @@ module.exports = function (grunt) {
                     src: ['src/views/**.html'],
                     dest: 'build/views'
                 }]
+            },
+            vendor: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: ['vendor/**'],
+                    dest: 'build/vendor'
+                }]
             }
         },
         shell: {
