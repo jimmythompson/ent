@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "main": "build/main.js",
   "dependencies": {
-    "d3": "^3.5.5"
+    "d3": "^3.5.5",
+    "named-regexp": "^0.1.1"
   },
   "devDependencies": {
     "electron-packager": "^3.3.0",
