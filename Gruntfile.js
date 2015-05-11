@@ -3,7 +3,12 @@ path = require("path");
 module.exports = function (grunt) {
     grunt.registerTask("build", [
         "less",
-        "copy"
+        "copy",
+        "packageModules"
+    ]);
+
+    grunt.registerTask("package", [
+        "shell:package"
     ]);
 
     grunt.registerTask("start", [
@@ -47,9 +52,18 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        packageModules: {
+            dist: {
+                src: 'package.json',
+                dest: 'build'
+            }
+        },
         shell: {
             start: {
                 command: 'npm run start'
+            },
+            package: {
+                command: 'npm run package'
             }
         }
     });
@@ -57,4 +71,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks('grunt-package-modules');
 };

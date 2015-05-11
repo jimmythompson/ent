@@ -2,7 +2,7 @@
   "name": "ent",
   "description": "an attack tree generator and visualiser",
   "version": "0.1.0",
-  "main": "build/main.js",
+  "main": "main.js",
   "dependencies": {
     "d3": "^3.5.5",
     "named-regexp": "^0.1.1"
@@ -13,10 +13,12 @@
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-less": "^1.0.1",
+    "grunt-package-modules": "^0.1.2",
     "grunt-shell": "^1.1.2",
     "less": "^2.5.0"
   },
   "scripts": {
-    "start": "electron . 2>&1"
+    "package": "electron-packager build Ent --out bin",
+    "start": "electron build 2>&1"
   }
 }
