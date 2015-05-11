@@ -1,18 +1,6 @@
-var dialogs = require('../dialog');
-var parser = require("../parser");
+var d3 = require("d3");
 
-document.getElementById("load").addEventListener("click", function () {
-    dialogs.openDialog();
-});
-
-document.getElementById("save").addEventListener("click", function () {
-    dialogs.saveDialog();
-});
-
-document.getElementById("generate").addEventListener("click", function () {
-    var root = parser.parse(
-        document.getElementById("text-area").value);
-
+module.exports = function (root) {
     var margin = { "top": 10, "right": 10, "bottom": 10, "left": 10 };
     var width = window.innerWidth - (margin.left + margin.right);
     var height =  window.innerHeight - (margin.top + margin.bottom);
@@ -100,4 +88,4 @@ document.getElementById("generate").addEventListener("click", function () {
         .attr("y", function(d) { return d.y + rectHeight * 2 + 3})
         .attr("text-anchor", "middle")
         .text(function(d) { return d.conjunction; });
-});
+};
