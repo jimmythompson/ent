@@ -1,6 +1,6 @@
 var d3 = require("d3");
 
-module.exports = function (root) {
+module.exports = function (root, element) {
     var margin = { "top": 10, "right": 10, "bottom": 10, "left": 10 };
     var width = window.innerWidth - (margin.left + margin.right);
     var height =  window.innerHeight - (margin.top + margin.bottom);
@@ -11,7 +11,7 @@ module.exports = function (root) {
 
     d3.select("svg").remove();
 
-    var svg = d3.select(document.getElementById("content"))
+    var svg = d3.select(element)
         .append("svg")
         .attr("width", width)
         .attr("height", height)
