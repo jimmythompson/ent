@@ -11,6 +11,7 @@
     "electron-packager": "^3.3.0",
     "electron-prebuilt": "^0.25.2",
     "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-less": "^1.0.1",
     "grunt-package-modules": "^0.1.2",

@@ -2,6 +2,7 @@ path = require("path");
 
 module.exports = function (grunt) {
     grunt.registerTask("build", [
+        "clean:release",
         "less",
         "copy",
         "packageModules"
@@ -17,6 +18,9 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            release: [ "bin/**.app", "build/**" ]
+        },
         less: {
             development: {
                 options: {
@@ -69,7 +73,8 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks("grunt-shell");
-    grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks('grunt-package-modules');
 };
