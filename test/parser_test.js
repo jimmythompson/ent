@@ -3,10 +3,9 @@ var parser = require("../src/parser");
 
 describe('parser', function () {
     describe('#parse()', function () {
-        it('should return an empty node when nothing is given', function () {
+        it('should return null when nothing is given', function () {
             var result = parser.parse("");
-            assert.deepEqual(result,
-                { "name": "", "children": [] });
+            assert.deepEqual(result, null);
         });
 
         it('should store the first line as the target', function () {

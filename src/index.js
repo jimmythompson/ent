@@ -1,13 +1,18 @@
 var parser = require("../parser");
 var dialogs = require("../dialog");
-var generateImage = require("../generate-image");
+var generator = require("../generate-image");
 
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
 
 var updateTreeView = function () {
     var root = parser.parse($textarea.value);
-    generateImage(root, $content);
+
+    generator.clear();
+
+    if (root) {
+        generator.generate(root, $content);
+    }
 };
 
 document.getElementById("load").addEventListener("click", function () {

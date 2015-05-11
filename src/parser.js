@@ -33,7 +33,7 @@ module.exports = {
         var lines = textToLines(text);
 
         if (!text) {
-            return {name: "", children: []};
+            return null;
         }
 
         var root = parseLine(lines[0]);

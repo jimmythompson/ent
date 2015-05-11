@@ -1,6 +1,10 @@
 var d3 = require("d3");
 
-module.exports = function (root, element) {
+module.exports.clear = function () {
+    d3.select("svg").remove();
+};
+
+module.exports.generate = function (root, element) {
     var margin = { "top": 10, "right": 10, "bottom": 10, "left": 10 };
     var width = window.innerWidth - (margin.left + margin.right);
     var height =  window.innerHeight - (margin.top + margin.bottom);
@@ -8,8 +12,6 @@ module.exports = function (root, element) {
     var rectHeight = rectWidth / 2;
     var rectRounding = 8;
     var joinRadius = 24;
-
-    d3.select("svg").remove();
 
     var svg = d3.select(element)
         .append("svg")
