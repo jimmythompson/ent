@@ -1,5 +1,3 @@
-var BrowserWindow = require('browser-window');
-
 module.exports = function (app, mainWindow) {
     return [{
         label: 'Ent',

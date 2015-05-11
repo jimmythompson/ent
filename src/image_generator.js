@@ -1,6 +1,15 @@
+var dialogs = require('../dialog');
 var parser = require("../parser");
 
-document.getElementById("generate").addEventListener('click', function () {
+document.getElementById("load").addEventListener("click", function () {
+    dialogs.openDialog();
+});
+
+document.getElementById("save").addEventListener("click", function () {
+    dialogs.saveDialog();
+});
+
+document.getElementById("generate").addEventListener("click", function () {
     var root = parser.parse(
         document.getElementById("text-area").value);
 
