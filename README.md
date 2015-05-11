@@ -5,8 +5,6 @@ An attack tree generator built on electron and D3.js.
 
 ## Contributing
 
-Right now the app isn't packaged, so you can only run it using `grunt start`.
-
 ### Prequisites
 
 ``` shell
@@ -18,3 +16,4 @@ Right now the app isn't packaged, so you can only run it using `grunt start`.
 
 * To compile and run the application, run `grunt build start`
 * To run the tests, run `mocha`.
+* To package the app into a distributable application, run `grunt build package`
