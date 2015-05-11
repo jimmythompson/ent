@@ -7,8 +7,14 @@
     <link type="text/css" rel="stylesheet" href="../style.css"/>
 </head>
 <body>
+<header>
+    <ul class="icon-bar">
+        <li><a id="load">Load</a></li>
+        <li><a id="save">Save</a></li>
+    </ul>
+</header>
     <div class="sidebar">
-        <textarea id="text-area" name="textual">= Open Safe
+        <textarea id="text-area">= Open Safe
 == Pick Lock
 == Learn Combo
 === Find Written Combo
@@ -22,8 +28,10 @@
 == Install Improperly</textarea>
         <button id="generate" class="button-primary">Generate</button>
     </div>
+<main>
     <div id="content"></div>
-    <script type="text/javascript" src="../node_modules/d3/d3.min.js"></script>
-    <script type="text/javascript" src="../image_generator.js"></script>
+</main>
+<script type="text/javascript" src="../node_modules/d3/d3.min.js"></script>
+<script type="text/javascript" src="../image_generator.js"></script>
 </body>
 </html>

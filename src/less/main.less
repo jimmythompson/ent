@@ -1,65 +1,21 @@
+@import "_variables";
+@import "_graph";
+@import "_header";
+@import "_sidebar";
+
+html, body {
+  height: 100%;
+}
+
 html {
   background: #ffffff;
 }
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: 10px;
+  padding: 0;
 }
 
-.sidebar {
-  background: #ffffff;
-  border: 1px solid #f0f0f0;
-  padding: 10px 10px 5px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  
-  h1 {
-    font-size: 1.3em;
-    text-align: center;
-  }
-
-  textarea {
-    border-radius: 0;
-    display: block;
-    font-size: 0.8em;
-    min-height: 250px;
-    width: 280px;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-
-path.link {
-  fill: none;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-rect.node {
-  cursor: pointer;
-  fill: #ffffff;
-  fill-opacity: .5;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-text.node {
-  font-size: 12px;
-}
-
-circle.join {
-  fill: #ffffff;
-  fill-opacity: 1;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-text.join {
-  font-size: 12px;
-  text-transform: uppercase;
+main {
+  padding: @gutter;
 }

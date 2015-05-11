@@ -13,6 +13,8 @@ app.on('ready', function () {
 
     mainWindow.loadUrl('file://' + __dirname + '/views/index.html');
 
+    mainWindow.toggleDevTools();
+
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
