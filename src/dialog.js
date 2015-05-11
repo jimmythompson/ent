@@ -14,17 +14,12 @@ module.exports.openDialog = function () {
         ]
     })[0];
 
-    console.log("Opening file " + fileName);
-
     return fs.readFileSync(fileName);
 };
 
 module.exports.saveDialog = function (text) {
-    console.log("Opening save dialog.");
-    var browserWindow = BrowserWindow.getFocusedWindow();
+    var fileName = dialog.showSaveDialog(
+        BrowserWindow.getFocusedWindow(), {});
 
-    var fileName = dialog.showSaveDialog(browserWindow, {});
-
-    console.log("Saving to " + fileName);
     fs.writeFileSync(fileName, text);
 };
