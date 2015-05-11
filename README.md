@@ -7,7 +7,7 @@ An attack tree generator built on electron and D3.js.
 
 ## Contributing
 
-### Prequisites
+### Prerequisites
 
 ``` shell
   npm install -g mocha grunt-cli
