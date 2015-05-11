@@ -21,22 +21,14 @@ document.getElementById("generate").addEventListener('click', function () {
         .append("g")
         .attr("transform", "translate(" + width / 3 + "," + margin.top + ")");
 
-    var conjunctions = function(nodes) {
-        var out = [];
-        nodes.forEach(function(node) {
-            if ("conjunction" in node) {
-                out.push(node)
-            }
-        });
-        return out;
-    };
-
     var tree = d3.layout.tree()
         .size([width, height])
         .nodeSize([rectWidth + 10, rectHeight + rectHeight / 5]);
     var nodes = tree.nodes(root);
     var links = tree.links(nodes);
-    var joins = conjunctions(nodes);
+    var joins = nodes.filter(function (node) {
+        return "conjunction" in node;
+    });
 
     var diagonalCoords = function(d) {
         var point1 = { "x": d.source.x, "y": (d.source.y + rectHeight) }
@@ -100,5 +92,3 @@ document.getElementById("generate").addEventListener('click', function () {
         .attr("text-anchor", "middle")
         .text(function(d) { return d.conjunction; });
 });
-
-
