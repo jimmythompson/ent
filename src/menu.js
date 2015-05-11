@@ -38,7 +38,7 @@ module.exports = [
             {
                 label: 'Quit',
                 accelerator: 'Command+Q',
-                click: function() { app.quit(); }
+                click: function() { BrowserWindow.getFocusedWindow().close(); }
             }
         ]
     },
