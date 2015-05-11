@@ -1,0 +1,12 @@
+= Open Safe
+== Pick Lock
+== Learn Combo
+=== Find Written Combo
+=== Get Combo From Target
+==== Threaten
+==== Blackmail
+==== Eavesdrop (AND)
+===== Listen to Conversation
+===== Get Target to State Combo
+== Cut Open Safe
+== Install Improperly
