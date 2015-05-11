@@ -19,7 +19,7 @@
     "less": "^2.5.0"
   },
   "scripts": {
-    "package": "electron-packager build Ent --out bin",
+    "package": "electron-packager build Ent --out bin --asar",
     "start": "electron build 2>&1"
   }
 }
