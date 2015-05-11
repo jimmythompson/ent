@@ -1,4 +1,4 @@
-= Burgle House
+= Break into house
 == Through the door
 === Smash door
 === Pick lock
