@@ -2,6 +2,11 @@
   "name": "ent",
   "description": "an attack tree generator and visualiser",
   "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jimmythompson/ent.git"
+  },
   "main": "main.js",
   "dependencies": {
     "d3": "^3.5.5",
