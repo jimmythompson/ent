@@ -11,7 +11,7 @@ var textToLines = function (text) {
 };
 
 var parseLine = function (line) {
-    parsed = expression.exec(line).captures;
+    var parsed = expression.exec(line).captures;
 
     return {
         name: parsed.name[0],
@@ -42,22 +42,22 @@ module.exports = {
              .filter(function(line) {
                  return (line.trim().length !== 0);
              }).reduce(function (previous, current) {
-                 parsed = parseLine(current);
+                 var parsed = parseLine(current);
 
-                if (parsed.depth > previous.depth) {
-                    parsed.parent = previous;
-                    previous.children.push(parsed);
-                } else {
-                    var actualParent = previous.parent;
-                    var howFarToJump = previous.depth - parsed.depth;
+                 if (parsed.depth > previous.depth) {
+                     parsed.parent = previous;
+                     previous.children.push(parsed);
+                 } else {
+                     var actualParent = previous.parent;
+                     var howFarToJump = previous.depth - parsed.depth;
 
-                    for (var i = 0; i < howFarToJump; i++) {
-                        actualParent = actualParent.parent;
-                    }
+                     for (var i = 0; i < howFarToJump; i++) {
+                         actualParent = actualParent.parent;
+                     }
 
-                    parsed.parent = actualParent;
-                    actualParent.children.push(parsed);
-                }
+                     parsed.parent = actualParent;
+                     actualParent.children.push(parsed);
+                 }
 
                  return parsed;
             }, root);
