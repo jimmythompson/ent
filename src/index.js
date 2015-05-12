@@ -1,3 +1,4 @@
+var xmldom = require("xmldom");
 var parser = require("../parser");
 var dialogs = require("../dialog");
 var generator = require("../generate-image");
@@ -22,6 +23,12 @@ document.getElementById("load").addEventListener("click", function () {
 
 document.getElementById("save").addEventListener("click", function () {
     dialogs.saveDialog($textarea.value);
+});
+
+document.getElementById("export").addEventListener("click", function () {
+    var svgGraph = document.getElementsByTagName('svg');
+    var svgXML = (new xmldom.XMLSerializer()).serializeToString(svgGraph[0]);
+    dialogs.saveDialog(svgXML);
 });
 
 document.getElementById("generate").addEventListener("click", updateTreeView);

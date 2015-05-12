@@ -15,6 +15,7 @@ module.exports.generate = function (root, element) {
 
     var svg = d3.select(element)
         .append("svg")
+        .attr('xmlns', 'http://www.w3.org/2000/svg')
         .attr("width", width)
         .attr("height", height)
         .append("g")

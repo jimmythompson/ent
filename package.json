@@ -10,7 +10,8 @@
   "main": "main.js",
   "dependencies": {
     "d3": "^3.5.5",
-    "named-regexp": "^0.1.1"
+    "named-regexp": "^0.1.1",
+    "xmldom": "^0.1.19"
   },
   "devDependencies": {
     "electron-packager": "^3.4.0",
