@@ -1,5 +1,5 @@
 # Ent
-[![Build Status](https://snap-ci.com/jimmythompson/ent/branch/master/build_image)](https://snap-ci.com/jimmythompson/ent/branch/master) [![Dependency Status](https://david-dm.org/jimmythompson/ent.svg)](https://david-dm.org/jimmythompson/ent)
+[![Build Status](https://snap-ci.com/jimmythompson/ent/branch/master/build_image)](https://snap-ci.com/jimmythompson/ent/branch/master) [![Dependency Status](https://david-dm.org/jimmythompson/ent.svg)](https://david-dm.org/jimmythompson/ent) [![devDependency Status](https://david-dm.org/jimmythompson/ent/dev-status.svg)](https://david-dm.org/jimmythompson/ent#info=devDependencies)
 
 An attack tree generator built on electron and D3.js.
 
