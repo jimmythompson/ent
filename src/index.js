@@ -16,6 +16,8 @@ var updateTreeView = function () {
     }
 };
 
+document.getElementById("generate").addEventListener("click", updateTreeView);
+
 document.getElementById("load").addEventListener("click", function () {
     $textarea.value = dialogs.openDialog();
     updateTreeView();
@@ -30,6 +32,4 @@ document.getElementById("export").addEventListener("click", function () {
     var svgXML = (new xmldom.XMLSerializer()).serializeToString(svgGraph[0]);
     dialogs.saveDialog(svgXML);
 });
-
-document.getElementById("generate").addEventListener("click", updateTreeView);
 
