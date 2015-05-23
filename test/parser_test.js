@@ -1,5 +1,5 @@
 var assert = require("assert");
-var parser = require("../src/parser");
+var parser = require("../src/app/parser");
 
 describe('parser', function () {
     describe('#parse()', function () {
