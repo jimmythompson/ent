@@ -24,10 +24,10 @@ module.exports = function (grunt) {
         less: {
             development: {
                 options: {
-                    paths: ["src/less"]
+                    paths: ["src/browser/style"]
                 },
                 files: {
-                    "build/browser/style.css": "src/browser/less/main.less"
+                    "build/browser/style.css": "src/browser/style/main.less"
                 }
             }
         },
