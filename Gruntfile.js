@@ -27,7 +27,7 @@ module.exports = function (grunt) {
                     paths: ["src/less"]
                 },
                 files: {
-                    "build/style.css": "src/less/main.less"
+                    "build/browser/style.css": "src/browser/less/main.less"
                 }
             }
         },
@@ -35,17 +35,17 @@ module.exports = function (grunt) {
             src: {
                 files: [{
                     expand: true,
-                    flatten: true,
-                    src: ['src/**.js'],
+                    cwd: 'src/',
+                    src: ['**.js', 'app/**.js', 'browser/**.js'],
                     dest: 'build/'
                 }]
             },
             views: {
                 files: [{
                     expand: true,
-                    flatten: true,
-                    src: ['src/views/**.html'],
-                    dest: 'build/views'
+                    cwd: 'src/',
+                    src: ['browser/**.html'],
+                    dest: 'build/'
                 }]
             },
             vendor: {

@@ -1,7 +1,7 @@
 var xmldom = require("xmldom");
-var parser = require("../parser");
-var dialogs = require("../dialog");
-var generator = require("../generate-image");
+var parser = require("../app/parser");
+var dialogs = require("../app/dialog");
+var generator = require("../app/generate-image");
 
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
