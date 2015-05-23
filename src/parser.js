@@ -30,17 +30,16 @@ var deepConvert = function (node) {
 
 module.exports = {
     parse: function (text) {
-        var lines = textToLines(text);
-
         if (!text) {
             return null;
         }
 
+        var lines = textToLines(text);
         var root = parseLine(lines[0]);
 
         lines.slice(1)
              .filter(function(line) {
-                 return (line.trim().length !== 0);
+                 return line.trim().length !== 0;
              }).reduce(function (previous, current) {
                  var parsed = parseLine(current);
 
