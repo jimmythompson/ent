@@ -1,3 +1,4 @@
+var $ = require("jquery");
 var xmldom = require("xmldom");
 var parser = require("../app/parser");
 var dialogs = require("../app/dialog");
@@ -14,22 +15,28 @@ var updateTreeView = function () {
     if (root) {
         generator.generate(root, $content);
     }
+
+    showSuccessMessage("Dat tree, ooft!");
 };
 
-document.getElementById("generate").addEventListener("click", updateTreeView);
+var showSuccessMessage = function (message) {
+    var $success = $(".success");
 
-document.getElementById("load").addEventListener("click", function () {
+    $success.text(message);
+    $success.fadeIn("slow", function () {
+        setTimeout(function () {
+            $success.fadeOut("slow");
+        }, 2000);
+    });
+};
+
+$("#generate").on("click", updateTreeView);
+
+$("#load").on("click", function () {
     $textarea.value = dialogs.openDialog();
     updateTreeView();
 });
 
-document.getElementById("save").addEventListener("click", function () {
+$("#save").on("click", function () {
     dialogs.saveDialog($textarea.value);
 });
-
-document.getElementById("export").addEventListener("click", function () {
-    var svgGraph = document.getElementsByTagName('svg');
-    var svgXML = (new xmldom.XMLSerializer()).serializeToString(svgGraph[0]);
-    dialogs.saveDialog(svgXML);
-});
-
