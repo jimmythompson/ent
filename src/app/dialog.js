@@ -19,5 +19,11 @@ module.exports.saveFile = function (text) {
     var fileName = dialog.showSaveDialog(
         BrowserWindow.getFocusedWindow(), {});
 
+    if (!fileName) {
+        return false;
+    }
+
     fs.writeFileSync(fileName, text);
+
+    return true;
 };

@@ -6,6 +6,7 @@ ipc.on("dialog:open", function (event) {
 });
 
 ipc.on("dialog:save", function (event, tree) {
-    dialogs.saveFile(tree);
-    event.sender.send("message:success", "Successfully saved.");
+    if (dialogs.saveFile(tree)) {
+        event.sender.send("message:success", "Successfully saved.");
+    }
 });

@@ -20,7 +20,6 @@ var renderTree = function () {
 };
 
 var showSuccessMessage = function (message) {
-
     $success.text(message);
     $success.fadeIn("slow", function () {
         setTimeout(function () {
