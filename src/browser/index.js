@@ -18,7 +18,7 @@ var renderTree = function () {
 
         generator.generate(root, $content);
     } catch (error) {
-        showErrorMessage("Could not parse the tree");
+        showErrorMessage("Could not create tree from the text");
     }
 };
 
@@ -43,13 +43,19 @@ var showSuccessMessage = function (message) {
 $("#generate").on("click", renderTree);
 
 $("#load").on("click", function () {
-    $textarea.value = ipc.sendSync("dialog:open");
+    ipc.send("dialog:open");
+});
+
+ipc.on("open:success", function(fileContents) {
+    $textarea.value = fileContents;
     renderTree();
-    showSuccessMessage("Successfully loaded file");
+    showSuccessMessage("Loaded file successfully");
 });
 
 $("#save").on("click", function () {
     ipc.send("dialog:save", $textarea.value);
 });
 
-ipc.on("message:success", showSuccessMessage);
+ipc.on("save:success", function () {
+    showSuccessMessage("Saved successfully");
+});

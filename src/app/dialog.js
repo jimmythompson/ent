@@ -5,12 +5,18 @@ var BrowserWindow = require("browser-window");
 module.exports.openFile = function () {
     var browserWindow = BrowserWindow.getFocusedWindow();
 
-    var fileName = dialog.showOpenDialog(browserWindow, {
+    var fileNames = dialog.showOpenDialog(browserWindow, {
         properties: [ "openFile" ],
         filters: [
             { name: 'Text Files', extensions: ['txt'] }
         ]
-    })[0];
+    });
+
+    if (!fileNames) {
+        return false;
+    }
+
+    var fileName = fileNames[0];
 
     return fs.readFileSync(fileName, "utf8");
 };
