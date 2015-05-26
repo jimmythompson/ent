@@ -1,12 +1,24 @@
 @import "_variables";
 
-.success {
-  background: @success-background;
+.alerts {
   left: @gutter;
-  color: @success-text;
-  display: none;
-  padding: 7px 10px;
   position: absolute;
-  text-align: center;
   z-index: 1;
+}
+
+.alert {
+  color: @message-text;
+  display: none;
+  float: left;
+  padding: 7px 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.error {
+  background: @error-colour;
+}
+
+.success {
+  background: @success-colour;
 }

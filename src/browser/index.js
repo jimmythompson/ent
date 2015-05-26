@@ -5,18 +5,30 @@ var xmldom = require("xmldom");
 var parser = require("../app/parser");
 var generator = require("./image_generator");
 
-var $success = $(".success");
+var $success = $(".alert.success");
+var $error = $(".alert.error");
+
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
 
 var renderTree = function () {
-    var root = parser.parse($textarea.value);
+    try {
+        var root = parser.parse($textarea.value);
+        generator.clear();
 
-    generator.clear();
-
-    if (root) {
         generator.generate(root, $content);
+    } catch (error) {
+        showErrorMessage("Could not parse the tree");
     }
+};
+
+var showErrorMessage = function (message) {
+    $error.text(message);
+    $error.fadeIn("slow", function () {
+        setTimeout(function () {
+            $error.fadeOut("slow");
+        }, 2000);
+    });
 };
 
 var showSuccessMessage = function (message) {
