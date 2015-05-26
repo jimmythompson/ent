@@ -3,6 +3,7 @@ var Menu = require('menu');
 var BrowserWindow = require('browser-window');
 
 var buildMenu = require('./app/menu');
+var events = require("./app/events");
 
 // Keep a global reference of the window object
 var mainWindow = null;

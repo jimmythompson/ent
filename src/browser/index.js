@@ -1,13 +1,15 @@
 var $ = require("jquery");
+var ipc = require("ipc");
 var xmldom = require("xmldom");
+
 var parser = require("../app/parser");
-var dialogs = require("../app/dialog");
 var generator = require("./image_generator");
 
+var $success = $(".success");
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
 
-var updateTreeView = function () {
+var renderTree = function () {
     var root = parser.parse($textarea.value);
 
     generator.clear();
@@ -15,12 +17,9 @@ var updateTreeView = function () {
     if (root) {
         generator.generate(root, $content);
     }
-
-    showSuccessMessage("Dat tree, ooft!");
 };
 
 var showSuccessMessage = function (message) {
-    var $success = $(".success");
 
     $success.text(message);
     $success.fadeIn("slow", function () {
@@ -30,13 +29,16 @@ var showSuccessMessage = function (message) {
     });
 };
 
-$("#generate").on("click", updateTreeView);
+$("#generate").on("click", renderTree);
 
 $("#load").on("click", function () {
-    $textarea.value = dialogs.openDialog();
-    updateTreeView();
+    $textarea.value = ipc.sendSync("dialog:open");
+    renderTree();
+    showSuccessMessage("Successfully loaded file");
 });
 
 $("#save").on("click", function () {
-    dialogs.saveDialog($textarea.value);
+    ipc.send("dialog:save", $textarea.value);
 });
+
+ipc.on("message:success", showSuccessMessage);

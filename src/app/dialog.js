@@ -1,10 +1,8 @@
-var remote = require("remote");
+var fs = require("fs");
+var dialog = require("dialog");
+var BrowserWindow = require("browser-window");
 
-var fs = remote.require("fs");
-var dialog = remote.require("dialog");
-var BrowserWindow = remote.require("browser-window");
-
-module.exports.openDialog = function () {
+module.exports.openFile = function () {
     var browserWindow = BrowserWindow.getFocusedWindow();
 
     var fileName = dialog.showOpenDialog(browserWindow, {
@@ -14,10 +12,10 @@ module.exports.openDialog = function () {
         ]
     })[0];
 
-    return fs.readFileSync(fileName);
+    return fs.readFileSync(fileName, "utf8");
 };
 
-module.exports.saveDialog = function (text) {
+module.exports.saveFile = function (text) {
     var fileName = dialog.showSaveDialog(
         BrowserWindow.getFocusedWindow(), {});
 
