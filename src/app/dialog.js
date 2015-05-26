@@ -22,8 +22,7 @@ module.exports.openFile = function () {
 };
 
 module.exports.saveFile = function (text) {
-    var fileName = dialog.showSaveDialog(
-        BrowserWindow.getFocusedWindow(), {});
+    var fileName = dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {});
 
     if (!fileName) {
         return false;
