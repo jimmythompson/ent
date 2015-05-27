@@ -59,3 +59,9 @@ $("#save").on("click", function () {
 ipc.on("save:success", function () {
     showSuccessMessage("Saved successfully");
 });
+
+window.onresize = function () {
+    $content.height = window.innerHeight;
+
+    renderTree();
+};
