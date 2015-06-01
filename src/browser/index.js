@@ -17,7 +17,7 @@ var renderTree = function () {
         renderer.render(parser.parse($textarea.value));
     } catch (error) {
         console.log(error);
-        showErrorMessage("Could not create tree from the text");
+        showErrorMessage("Could not create tree");
     }
 };
 
@@ -48,7 +48,7 @@ $("#load").on("click", function () {
 ipc.on("open:success", function(fileContents) {
     $textarea.value = fileContents;
     renderTree();
-    showSuccessMessage("Loaded file successfully");
+    showSuccessMessage("Loaded tree successfully");
 });
 
 $("#save").on("click", function () {
@@ -56,7 +56,7 @@ $("#save").on("click", function () {
 });
 
 ipc.on("save:success", function () {
-    showSuccessMessage("Saved successfully");
+    showSuccessMessage("Saved tree successfully");
 });
 
 window.onresize = function () {
