@@ -38,7 +38,13 @@ module.exports = function (element) {
 
         this.clear();
 
-        var svg = d3.select($element)
+        var tree = d3.layout.tree().nodeSize(
+            [RECTANGLE_WIDTH + 2 * MARGIN, RECTANGLE_HEIGHT + 2 * MARGIN]);
+
+        var nodes = tree.nodes(root);
+        var links = tree.links(nodes);
+
+        var graph = d3.select($element)
             .append("svg")
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .attr("width", width)
@@ -46,20 +52,14 @@ module.exports = function (element) {
             .append("g")
             .attr("transform", "translate(" + width / 2 + ", " + MARGIN + ")");
 
-        var tree = d3.layout.tree().nodeSize(
-            [RECTANGLE_WIDTH + MARGIN, RECTANGLE_HEIGHT + RECTANGLE_HEIGHT / 5]);
-
-        var nodes = tree.nodes(root);
-        var links = tree.links(nodes);
-
-        svg.selectAll("path.link")
+        graph.selectAll("path.link")
             .data(links)
             .enter()
             .append("path")
             .attr("class", "link")
             .attr("d", function(d) { return diagonal(diagonalCoords(d)); });
 
-        svg.selectAll("rect.node")
+        graph.selectAll("rect.node")
             .data(nodes)
             .enter()
             .append("rect")
@@ -71,7 +71,7 @@ module.exports = function (element) {
             .attr("rx", ROUNDING)
             .attr("ry", ROUNDING);
 
-        svg.selectAll("text.node")
+        graph.selectAll("text.node")
             .data(nodes)
             .enter()
             .append("text")
