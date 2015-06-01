@@ -3,21 +3,20 @@ var ipc = require("ipc");
 var xmldom = require("xmldom");
 
 var parser = require("../app/parser");
-var generator = require("./image_generator");
+var TreeRenderer = require("./tree_renderer");
 
 var $success = $(".alert.success");
 var $error = $(".alert.error");
-
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
 
+var renderer = new TreeRenderer($content);
+
 var renderTree = function () {
     try {
-        var root = parser.parse($textarea.value);
-        generator.clear();
-
-        generator.generate(root, $content);
+        renderer.render(parser.parse($textarea.value));
     } catch (error) {
+        console.log(error);
         showErrorMessage("Could not create tree from the text");
     }
 };
