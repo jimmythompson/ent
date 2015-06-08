@@ -3,11 +3,10 @@ var d3 = require("d3"),
 
 var RECTANGLE_WIDTH = 150,
     RECTANGLE_HEIGHT = RECTANGLE_WIDTH / 2,
-    MARGIN = 10,
-    ROUNDING = 8;
+    MARGIN = 10;
 
-var rotate_format = function (x, y, scale) {
-    return sprintf("translate(%s,%s) scale(%s)", x, y, scale);
+var rotate_format = function (translate, scale) {
+    return sprintf("translate(%s) scale(%s)", translate, scale);
 };
 
 var diagonalCoords = function(d) {
@@ -29,7 +28,7 @@ var diagonal = d3.svg.line()
 
 module.exports = function (element) {
     var $element = element;
-    var interactionHandler = d3.behavior.zoom().scaleExtent([1, 8]);
+    var graphBehaviour = d3.behavior.zoom().scaleExtent([0.5, 8]);
 
     this.clear = function () {
         d3.select($element)
@@ -52,25 +51,23 @@ module.exports = function (element) {
 
         var svg = d3.select($element)
                     .append("svg")
-                    .attr("xmlns", "http://www.w3.org/2000/svg");
+                    .attr("xmlns", "http://www.w3.org/2000/svg")
+                    .attr("width", width)
+                    .attr("height", height);
 
-
-        var graph = svg.attr("width", width)
-                       .attr("height", height)
-                       .append("g");
+        var graph = svg.append("g");
 
         var updateLocationAndZoom = function () {
-            var translation = interactionHandler.translate();
-            graph.attr("transform",
-                rotate_format(translation[0], translation[1], interactionHandler.scale()));
+            graph.attr("transform", rotate_format(
+                graphBehaviour.translate(), graphBehaviour.scale()));
         };
 
-        interactionHandler.on("zoom", updateLocationAndZoom);
+        graphBehaviour.on("zoom", updateLocationAndZoom);
 
-        svg.call(interactionHandler)
-           .call(interactionHandler.event);
+        svg.call(graphBehaviour)
+           .call(graphBehaviour.event);
 
-        interactionHandler.translate([width / 2, MARGIN]);
+        graphBehaviour.translate([width / 2, MARGIN]);
         updateLocationAndZoom();
 
         graph.selectAll("path.link")
@@ -88,9 +85,7 @@ module.exports = function (element) {
             .attr("width", RECTANGLE_WIDTH)
             .attr("height", RECTANGLE_HEIGHT)
             .attr("x", function(d) { return d.x - RECTANGLE_HEIGHT; })
-            .attr("y", function(d) { return d.y; })
-            .attr("rx", ROUNDING)
-            .attr("ry", ROUNDING);
+            .attr("y", function(d) { return d.y; });
 
         graph.selectAll("text.node")
             .data(nodes)
