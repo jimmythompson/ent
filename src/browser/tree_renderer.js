@@ -1,9 +1,14 @@
-var d3 = require("d3");
+var d3 = require("d3"),
+    sprintf = require("sprintf-js").sprintf;
 
 var RECTANGLE_WIDTH = 150,
     RECTANGLE_HEIGHT = RECTANGLE_WIDTH / 2,
     MARGIN = 10,
     ROUNDING = 8;
+
+var rotate_format = function (x, y, scale) {
+    return sprintf("translate(%s,%s) scale(%s)", x, y, scale);
+};
 
 var diagonalCoords = function(d) {
     var point1 = { x: d.source.x, y: (d.source.y + RECTANGLE_HEIGHT) };
@@ -44,13 +49,19 @@ module.exports = function (element) {
         var nodes = tree.nodes(root);
         var links = tree.links(nodes);
 
-        var graph = d3.select($element)
-            .append("svg")
-            .attr("xmlns", "http://www.w3.org/2000/svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(" + width / 2 + ", " + MARGIN + ")");
+        var svg = d3.select($element)
+                    .append("svg")
+                    .attr("xmlns", "http://www.w3.org/2000/svg");
+
+        var graph = svg.attr("width", width)
+                       .attr("height", height)
+                       .append("g")
+                       .attr("transform", "translate(" + width / 2 + ", " + MARGIN + ")");
+
+        svg.call(d3.behavior.zoom().on("zoom", function () {
+            var translation = d3.event.translate;
+            graph.attr("transform", rotate_format(translation[0], translation[1], d3.event.scale));
+        }));
 
         graph.selectAll("path.link")
             .data(links)
