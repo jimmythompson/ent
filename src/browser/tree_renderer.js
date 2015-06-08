@@ -29,6 +29,7 @@ var diagonal = d3.svg.line()
 
 module.exports = function (element) {
     var $element = element;
+    var interactionHandler = d3.behavior.zoom().scaleExtent([1, 8]);
 
     this.clear = function () {
         d3.select($element)
@@ -53,15 +54,24 @@ module.exports = function (element) {
                     .append("svg")
                     .attr("xmlns", "http://www.w3.org/2000/svg");
 
+
         var graph = svg.attr("width", width)
                        .attr("height", height)
-                       .append("g")
-                       .attr("transform", "translate(" + width / 2 + ", " + MARGIN + ")");
+                       .append("g");
 
-        svg.call(d3.behavior.zoom().on("zoom", function () {
-            var translation = d3.event.translate;
-            graph.attr("transform", rotate_format(translation[0], translation[1], d3.event.scale));
-        }));
+        var updateLocationAndZoom = function () {
+            var translation = interactionHandler.translate();
+            graph.attr("transform",
+                rotate_format(translation[0], translation[1], interactionHandler.scale()));
+        };
+
+        interactionHandler.on("zoom", updateLocationAndZoom);
+
+        svg.call(interactionHandler)
+           .call(interactionHandler.event);
+
+        interactionHandler.translate([width / 2, MARGIN]);
+        updateLocationAndZoom();
 
         graph.selectAll("path.link")
             .data(links)
