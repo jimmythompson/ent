@@ -17,8 +17,8 @@ module.exports = function (element) {
     this.render = function (root) {
         var parent = $element.parentNode;
 
-        var width = parent.offsetWidth - (2 * MARGIN);
-        var height = parent.offsetHeight - (2 * MARGIN);
+        var width = parent.offsetWidth;
+        var height = parent.offsetHeight;
 
         this.clear();
 
