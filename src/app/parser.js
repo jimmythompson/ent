@@ -1,4 +1,5 @@
-var named = require('named-regexp').named;
+var named = require('named-regexp').named,
+    range = require("range").range;
 
 var expression = named(/^(:<depth>=+) (:<name>[^=]+)$/);
 
@@ -50,9 +51,9 @@ module.exports = {
                      var actualParent = previous.parent;
                      var howFarToJump = previous.depth - parsed.depth;
 
-                     for (var i = 0; i < howFarToJump; i++) {
+                     range(0, howFarToJump).forEach(function (i) {
                          actualParent = actualParent.parent;
-                     }
+                     });
 
                      parsed.parent = actualParent;
                      actualParent.children.push(parsed);

@@ -12,6 +12,7 @@
     "d3": "^3.5.5",
     "jquery": "^2.1.4",
     "named-regexp": "^0.1.1",
+    "range": "0.0.3",
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
