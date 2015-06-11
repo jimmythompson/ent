@@ -1,6 +1,6 @@
 {
   "name": "ent",
-  "description": "an attack tree generator and visualiser",
+  "description": "An attack tree visualisation tool",
   "version": "0.1.0",
   "private": true,
   "repository": {
