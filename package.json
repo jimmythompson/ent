@@ -30,7 +30,7 @@
     "sinon": "^1.14.1"
   },
   "scripts": {
-    "package": "electron-packager build Ent --out bin --asar",
+    "package": "electron-packager build Ent --platform=darwin --arch=x64 --version=0.27.2 --asar --out bin --icon doc/logo.icns",
     "start": "electron build 2>&1"
   }
 }
