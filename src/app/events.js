@@ -14,3 +14,9 @@ ipc.on("dialog:save", function (event, tree) {
         event.sender.send("save:success");
     }
 });
+
+ipc.on("dialog:export", function (event, svg) {
+    if (dialogs.exportToSvg(svg)) {
+        event.sender.send("export:success");
+    }
+});

@@ -59,7 +59,7 @@ $("#save").on("click", function () {
 });
 
 ipc.on("save:success", function () {
-    showSuccessMessage("Saved tree successfully");
+    showSuccessMessage("Saved text tree successfully");
 });
 
 var expanded = true;
@@ -76,6 +76,14 @@ $showHide.on("click", function () {
             expanded = true;
         });
     }
+});
+
+$("#export").on("click", function () {
+    ipc.send("dialog:export", $content.innerHTML);
+});
+
+ipc.on("export:success", function () {
+    showSuccessMessage("Exported tree to SVG successfully");
 });
 
 window.onresize = function () {

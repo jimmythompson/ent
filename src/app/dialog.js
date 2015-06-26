@@ -19,8 +19,23 @@ module.exports.openFile = function () {
 
 module.exports.saveFile = function (text) {
     var fileName = dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
-        title: "Open tree",
-        filters: [{ name: "Text", extensions: ["txt"]}]
+        title: "Export tree as text",
+        filters: [{ name: "Text", extensions: ["txt"] }]
+    });
+
+    if (!fileName) {
+        return false;
+    }
+
+    fs.writeFileSync(fileName, text);
+
+    return true;
+};
+
+module.exports.exportToSvg = function (text) {
+    var fileName = dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+        title: "Export tree to SVG",
+        filters: [{ name: "SVG", extensions: ["svg"] }]
     });
 
     if (!fileName) {
