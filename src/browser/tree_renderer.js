@@ -7,18 +7,16 @@ var RECTANGLE_WIDTH = 150,
 
 
 module.exports = function (element) {
-    var $element = element;
+    var $element = element,
+        $svg = null;
 
     this.clear = function () {
-        d3.select($element)
-          .select("svg").remove();
+        if ($svg) {
+            $svg.remove();
+        }
     };
 
     this.render = function (root) {
-        var parent = $element.parentNode;
-
-        var width = parent.offsetWidth;
-        var height = parent.offsetHeight;
 
         this.clear();
 
@@ -28,15 +26,26 @@ module.exports = function (element) {
         var nodes = tree.nodes(root);
         var links = tree.links(nodes);
 
-        var svg = d3.select($element)
-                    .append("svg")
-                    .attr("xmlns", "http://www.w3.org/2000/svg")
-                    .attr("width", width)
-                    .attr("height", height);
+        $svg = d3.select($element)
+                 .append("svg")
+                 .attr("xmlns", "http://www.w3.org/2000/svg");
 
-        var treeView = new TreeView(svg);
+        this.resize();
+
+        var treeView = new TreeView($svg);
 
         treeView.draw(nodes, links);
-        treeView.move([width / 2, MARGIN], 1.0);
+        treeView.move([$svg.attr("width") / 2, MARGIN], 1.0);
+    };
+
+    this.resize = function () {
+        if ($svg) {
+            var parent = $element.parentNode;
+            var width = parent.offsetWidth;
+            var height = parent.offsetHeight;
+
+            $svg.attr("width", width)
+                .attr("height", height);
+        }
     };
 };

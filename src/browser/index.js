@@ -78,7 +78,7 @@ $showHide.on("click", function () {
 });
 
 window.onresize = function () {
+    $content.width = window.innerWidth;
     $content.height = window.innerHeight;
-
-    renderTree();
+    renderer.resize();
 };
