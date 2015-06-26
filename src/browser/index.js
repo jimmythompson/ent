@@ -7,6 +7,8 @@ var TreeRenderer = require("./tree_renderer");
 
 var $success = $(".alert.success");
 var $error = $(".alert.error");
+var $showHide = $("#show-hide");
+var $sidebar = $(".sidebar");
 var $content = document.getElementById("content");
 var $textarea = document.getElementById("text-area");
 
@@ -57,6 +59,22 @@ $("#save").on("click", function () {
 
 ipc.on("save:success", function () {
     showSuccessMessage("Saved tree successfully");
+});
+
+var expanded = true;
+
+$showHide.on("click", function () {
+    if (expanded) {
+        $showHide.html("&#x25B2;");
+        $sidebar.fadeOut("fast", function () {
+            expanded = false;
+        });
+    } else {
+        $showHide.html("&#x25BC;");
+        $sidebar.fadeIn("fast", function () {
+            expanded = true;
+        });
+    }
 });
 
 window.onresize = function () {
