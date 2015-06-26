@@ -3,13 +3,9 @@ var dialog = require("dialog");
 var BrowserWindow = require("browser-window");
 
 module.exports.openFile = function () {
-    var browserWindow = BrowserWindow.getFocusedWindow();
-
-    var fileNames = dialog.showOpenDialog(browserWindow, {
+    var fileNames = dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
         properties: [ "openFile" ],
-        filters: [
-            { name: 'Text Files', extensions: ['txt'] }
-        ]
+        filters: [{ name: "Text Files", extensions: ["txt"] }]
     });
 
     if (!fileNames) {
@@ -22,7 +18,10 @@ module.exports.openFile = function () {
 };
 
 module.exports.saveFile = function (text) {
-    var fileName = dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {});
+    var fileName = dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+        title: "Open tree",
+        filters: [{ name: "Text", extensions: ["txt"]}]
+    });
 
     if (!fileName) {
         return false;

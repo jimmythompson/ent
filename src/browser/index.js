@@ -5,12 +5,13 @@ var xmldom = require("xmldom");
 var parser = require("../app/parser");
 var TreeRenderer = require("./tree_renderer");
 
-var $success = $(".alert.success");
-var $error = $(".alert.error");
-var $showHide = $("#show-hide");
-var $sidebar = $(".sidebar");
-var $content = document.getElementById("content");
-var $textarea = document.getElementById("text-area");
+var $success = $(".alert.success"),
+    $error = $(".alert.error"),
+    $showHide = $("#show-hide"),
+    $sidebar = $(".sidebar");
+
+var $content = document.getElementById("content"),
+    $textarea = document.getElementById("text-area");
 
 var renderer = new TreeRenderer($content);
 

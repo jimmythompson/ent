@@ -17,7 +17,6 @@ module.exports = function (element) {
     };
 
     this.render = function (root) {
-
         this.clear();
 
         var tree = d3.layout.tree().nodeSize(
@@ -41,11 +40,9 @@ module.exports = function (element) {
     this.resize = function () {
         if ($svg) {
             var parent = $element.parentNode;
-            var width = parent.offsetWidth;
-            var height = parent.offsetHeight;
 
-            $svg.attr("width", width)
-                .attr("height", height);
+            $svg.attr("width", parent.offsetWidth)
+                .attr("height", parent.offsetHeight);
         }
     };
 };
