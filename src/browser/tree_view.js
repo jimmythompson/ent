@@ -25,6 +25,7 @@ var diagonal = d3.svg.line()
     .y(function (d) { return d.y; })
     .interpolate("step");
 
+
 module.exports = function (svg) {
     var $this = this,
         graph = svg.append("g"),
@@ -63,6 +64,11 @@ module.exports = function (svg) {
             .append("path")
             .attr("class", "link")
             .attr("d", function(d) { return diagonal(diagonalCoords(d)); });
+
+        graph.selectAll("*")
+            .attr("style", function () {
+                return inlineStyle(this, svg.node());
+            });
     };
 
     this.move = function (translation, scale) {

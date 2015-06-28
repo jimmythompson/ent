@@ -1,9 +1,11 @@
 var $ = require("jquery");
-var ipc = require("ipc");
-var xmldom = require("xmldom");
+    ipc = require("ipc");
+    xmldom = require("xmldom");
 
 var parser = require("../app/parser");
-var TreeRenderer = require("./tree_renderer");
+
+var TreeRenderer = require("./tree_renderer"),
+    inlineStyle = require("./inline_style");
 
 var $success = $(".alert.success"),
     $error = $(".alert.error"),
