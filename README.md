@@ -16,7 +16,7 @@ Currently the application is only available for Mac:
 ### Prerequisites
 
 ``` shell
-  npm install -g grunt-cli
+  npm install -g gulp
   npm install
 ```
 
