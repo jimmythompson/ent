@@ -22,6 +22,6 @@ Currently the application is only available for Mac:
 
 ### Running the application
 
-* To compile and run the application, run `grunt build start`
+* To compile and run the application, run `gulp dev`
 * To run the tests, run `mocha`.
-* To package the app into a distributable application, run `grunt build package`
+* To package the app into a distributable application, run `gulp package`
