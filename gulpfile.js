@@ -67,7 +67,7 @@ gulp.task("run-unit-tests", function () {
         .pipe(mocha())
 });
 
-gulp.task("package", [ "build" ], function () {
+gulp.task("package", [ "build", "test" ], function () {
     return gulp
         .src(".", { read: false })
         .pipe(shell("npm run package"));
