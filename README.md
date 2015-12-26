@@ -16,12 +16,12 @@ Currently the application is only available for Mac:
 ### Prerequisites
 
 ``` shell
-  npm install -g mocha grunt-cli
+  npm install -g grunt-cli
   npm install
 ```
 
 ### Running the application
 
 * To compile and run the application, run `gulp dev`
-* To run the tests, run `mocha`.
+* To run the tests, run `gulp test`.
 * To package the app into a distributable application, run `gulp package`

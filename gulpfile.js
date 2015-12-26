@@ -2,7 +2,8 @@ var clean = require("gulp-clean"),
     gnf = require("gulp-npm-files"),
     gulp = require("gulp"),
     less = require("gulp-less"),
-    rename = require("gulp-rename")
+    mocha = require("gulp-mocha"),
+    rename = require("gulp-rename"),
     shell = require("gulp-shell");
 
 var buildDirectory = "build";
@@ -10,6 +11,10 @@ var buildDirectory = "build";
 gulp.task("clean", [
     "clean-app",
     "clean-build"
+]);
+
+gulp.task("test", [
+    "run-unit-tests"
 ]);
 
 gulp.task("clean-app", function () {
@@ -54,6 +59,12 @@ gulp.task("copy-node-modules", [ "clean" ], function () {
     return gulp
         .src(gnf(), { base: "./" })
         .pipe(gulp.dest(buildDirectory));
+});
+
+gulp.task("run-unit-tests", function () {
+    return gulp
+        .src("test/**.js", { read: false })
+        .pipe(mocha())
 });
 
 gulp.task("package", [ "build" ], function () {
