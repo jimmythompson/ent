@@ -1,10 +1,12 @@
 var clean = require("gulp-clean"),
-    gnf = require("gulp-npm-files"),
+    gulpNpmFiles = require("gulp-npm-files"),
     gulp = require("gulp"),
+    gulpWebpack = require("gulp-webpack"),
     less = require("gulp-less"),
     mocha = require("gulp-mocha"),
     rename = require("gulp-rename"),
-    shell = require("gulp-shell");
+    shell = require("gulp-shell"),
+    webpack = require("webpack");
 
 var buildDirectory = "build";
 
@@ -20,13 +22,13 @@ gulp.task("test", [
 gulp.task("clean-app", function () {
     return gulp
         .src("bin/Ent*", { read: false })
-        .pipe(clean());
+        .pipe(clean({ force: true }));
 });
 
 gulp.task("clean-build", function () {
     return gulp
         .src(buildDirectory, { read: false })
-        .pipe(clean());
+        .pipe(clean({ force: true }));
 });
 
 gulp.task("build-style", [ "clean" ], function () {
@@ -45,19 +47,36 @@ gulp.task("copy-package-json", [ "clean" ], function () {
 
 gulp.task("copy-source", [ "clean" ], function () {
     return gulp
-        .src(["src/app/**.js", "src/browser/**.*", "src/*.js"], { base: "./src" })
+        .src(["src/app/**.js", "src/browser/**.html", "src/*.js"], { base: "./src" })
         .pipe(gulp.dest(buildDirectory));
+});
+
+gulp.task("build-source", [ "clean" ], function () {
+    return gulp
+        .src("src/browser/index.js")
+        .pipe(gulpWebpack({
+            output: {
+                filename: "bundle.js"
+            },
+            plugins: [
+                new webpack.ProvidePlugin([
+                    'd3'
+                ])
+            ],
+            target: "atom"
+        }))
+        .pipe(gulp.dest("build/browser/"));
 });
 
 gulp.task("copy-vendor", [ "clean" ], function () {
     return gulp
         .src("vendor/**", { base: "./" })
         .pipe(gulp.dest(buildDirectory));
-})
+});
 
 gulp.task("copy-node-modules", [ "clean" ], function () {
     return gulp
-        .src(gnf(), { base: "./" })
+        .src(gulpNpmFiles(), { base: "./" })
         .pipe(gulp.dest(buildDirectory));
 });
 
@@ -83,6 +102,7 @@ gulp.task("build", [
     "clean",
     "build-style",
     "copy-source",
+    "build-source",
     "copy-vendor",
     "copy-node-modules",
     "copy-package-json"

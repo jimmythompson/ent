@@ -4,8 +4,7 @@ var $ = require("jquery");
 
 var parser = require("../app/parser");
 
-var TreeRenderer = require("./tree_renderer"),
-    inlineStyle = require("./inline_style");
+var TreeRenderer = require("./tree_renderer");
 
 var $success = $(".alert.success"),
     $error = $(".alert.error"),

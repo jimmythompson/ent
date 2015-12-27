@@ -1,5 +1,6 @@
 var d3 = require("d3"),
-    sprintf = require("sprintf-js").sprintf;
+    sprintf = require("sprintf-js").sprintf,
+    inlineStyle = require("./inline_style");
 
 var RECTANGLE_WIDTH = 150,
     RECTANGLE_HEIGHT = RECTANGLE_WIDTH / 2;
