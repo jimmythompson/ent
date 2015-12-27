@@ -23,7 +23,8 @@ module.exports = React.createClass({
     },
 
     componentDidUpdate: function () {
-        this._updateCanvas();
+        // setTimeout stops the dispatch inside a dispatch error
+        setTimeout(this._updateCanvas);
     },
 
     componentDidMount: function () {
