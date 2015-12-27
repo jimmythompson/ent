@@ -9,7 +9,7 @@ var getStateFromStore = function () {
 
 module.exports = React.createClass({
     propTypes: {
-        onTextAreaChanged: React.PropTypes.func.isRequired
+        onGenerateButtonPressed: React.PropTypes.func.isRequired
     },
 
     getInitialState: function () {
@@ -19,13 +19,14 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
-                <textarea id="text-area" defaultValue={this.state.content} onChange={this._onTextAreaChanged} />
+                <textarea id="text-area" defaultValue={this.state.content} ref="text"/>
+                <button id="generate" className="button-primary" onClick={this._onGenerateButtonPressed}>Generate</button>
             </div>
         );
     },
 
-    _onTextAreaChanged: function (event) {
-        this.props.onTextAreaChanged(event.target.value);
+    _onGenerateButtonPressed: function () {
+        this.props.onGenerateButtonPressed(this.refs.text.value);
     },
 
     componentDidMount: function () {

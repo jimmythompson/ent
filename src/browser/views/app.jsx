@@ -11,7 +11,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <Menu />
-                <Sidebar onTextAreaChanged={this._changeTree}/>
+                <Sidebar onGenerateButtonPressed={this._changeTree}/>
                 <Canvas />
             </div>
         );
