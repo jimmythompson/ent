@@ -10,6 +10,8 @@
   "main": "main.js",
   "dependencies": {
     "d3": "^3.5.5",
+    "events": "^1.1.0",
+    "flux": "^2.1.1",
     "jquery": "^2.1.4",
     "named-regexp": "^0.1.1",
     "range": "0.0.3",

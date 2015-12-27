@@ -1,16 +1,35 @@
-var React = require("react");
+var React = require("react"),
+    TreeStore = require("../stores/tree_store");
+
+var getStateFromStore = function () {
+    return {
+        content: TreeStore.getContent()
+    };
+};
 
 module.exports = React.createClass({
-    propTypes: {
-        content: React.PropTypes.string.isRequired
+    getInitialState: function () {
+        return getStateFromStore();
     },
 
     render: function () {
         return (
             <div className="sidebar">
-                <textarea id="text-area" value={this.props.content} />
+                <textarea id="text-area" value={this.state.content} onChange={function () {}} />
                 <button id="generate" className="button-primary">Generate</button>
             </div>
         );
+    },
+
+    componentDidMount: function () {
+        TreeStore.addListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+       TreeStore.removeListener(this._onChange);
+    },
+
+    _onChange: function () {
+        this.setState(getStateFromStore());
     }
 });
