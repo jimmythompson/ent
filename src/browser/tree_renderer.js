@@ -6,43 +6,26 @@ var RECTANGLE_WIDTH = 150,
     MARGIN = 10;
 
 
-module.exports = function (element) {
-    var $element = element,
-        $svg = null;
+module.exports = function ($element, root) {
+    d3.select($element).select("svg").remove();
 
-    this.clear = function () {
-        if ($svg) {
-            $svg.remove();
-        }
-    };
+    var tree = d3.layout.tree().nodeSize(
+        [RECTANGLE_WIDTH + 2 * MARGIN, RECTANGLE_HEIGHT + 2 * MARGIN]);
 
-    this.render = function (root) {
-        this.clear();
+    var nodes = tree.nodes(root);
+    var links = tree.links(nodes);
 
-        var tree = d3.layout.tree().nodeSize(
-            [RECTANGLE_WIDTH + 2 * MARGIN, RECTANGLE_HEIGHT + 2 * MARGIN]);
+    var parent = $element.parentNode;
 
-        var nodes = tree.nodes(root);
-        var links = tree.links(nodes);
+    var $svg = d3
+        .select($element)
+        .append("svg")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("width", parent.offsetWidth)
+        .attr("height", parent.offsetHeight);
 
-        $svg = d3.select($element)
-                 .append("svg")
-                 .attr("xmlns", "http://www.w3.org/2000/svg");
+    var treeView = new TreeView($svg);
 
-        this.resize();
-
-        var treeView = new TreeView($svg);
-
-        treeView.draw(nodes, links);
-        treeView.move([$svg.attr("width") / 2, MARGIN], 1.0);
-    };
-
-    this.resize = function () {
-        if ($svg) {
-            var parent = $element.parentNode;
-
-            $svg.attr("width", parent.offsetWidth)
-                .attr("height", parent.offsetHeight);
-        }
-    };
+    treeView.draw(nodes, links);
+    treeView.move([$svg.attr("width") / 2, MARGIN], 1.0);
 };
