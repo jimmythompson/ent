@@ -27,7 +27,7 @@ var diagonal = d3.svg.line()
     .interpolate("step");
 
 
-module.exports = function (svg) {
+module.exports = function (svg, onInteraction) {
     var $this = this,
         graph = svg.append("g"),
         behavior = d3.behavior.zoom().scaleExtent([0.5, 8]);
@@ -76,6 +76,7 @@ module.exports = function (svg) {
         behavior.translate(translation)
                 .scale(scale);
         graph.attr("transform", rotate_format(translation, scale));
+        onInteraction();
     };
 };
 

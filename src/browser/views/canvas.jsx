@@ -45,10 +45,14 @@ module.exports = React.createClass({
     _drawTree: function () {
         try {
             var $content = ReactDOM.findDOMNode(this);
-            renderTree($content, parser.parse(this.state.tree));
+            renderTree($content, parser.parse(this.state.tree), this._onInteraction);
         } catch (error) {
             console.log(error);
         }
+    },
+
+    _onInteraction: function () {
+        CanvasActions.updateCanvas(this._getHtml());
     },
 
     _updateCanvas: function () {

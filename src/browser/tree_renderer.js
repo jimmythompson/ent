@@ -6,7 +6,7 @@ var RECTANGLE_WIDTH = 150,
     MARGIN = 10;
 
 
-module.exports = function ($element, root) {
+module.exports = function ($element, root, onInteraction) {
     d3.select($element).select("svg").remove();
 
     var tree = d3.layout.tree().nodeSize(
@@ -24,7 +24,7 @@ module.exports = function ($element, root) {
         .attr("width", parent.offsetWidth)
         .attr("height", parent.offsetHeight);
 
-    var treeView = new TreeView($svg);
+    var treeView = new TreeView($svg, onInteraction);
 
     treeView.draw(nodes, links);
     treeView.move([$svg.attr("width") / 2, MARGIN], 1.0);
