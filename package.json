@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/ThoughtWorksInc/ent.git"
+    "url": "git://github.com/jimmythompson/ent.git"
   },
   "main": "main.js",
   "dependencies": {
