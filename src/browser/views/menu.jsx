@@ -1,5 +1,12 @@
 var React = require("react"),
-    MenuActions = require("../actions/menu_actions");
+    MenuActions = require("../actions/menu_actions"),
+    ConfigStore = require("../stores/config_store");
+
+var getStateFromStore = function () {
+    return {
+        sidebarEnabled: ConfigStore.isSidebarEnabled()
+    }
+};
 
 var LeftItem = React.createClass({
     propTypes: {
@@ -16,8 +23,8 @@ var LeftItem = React.createClass({
 
 var RightItem = React.createClass({
     propTypes: {
-        id: React.PropTypes.string.isRequired,
         name: React.PropTypes.string.isRequired,
+        onClick: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -28,17 +35,36 @@ var RightItem = React.createClass({
 });
 
 module.exports = React.createClass({
+    getInitialState: function () {
+        return getStateFromStore();
+    },
+
     render: function () {
         return (
             <nav role="navigation">
                 <ul className="icon-bar">
                     <LeftItem id="load" name="Load" onClick={this._onLoadClicked} />
                     <LeftItem id="save" name="Save" onClick={this._onSaveClicked} />
-                    <LeftItem id="export" name="Export" onClick={this._onLoadClicked} />
-                    <RightItem id="show-hide" name="&#x25BC;" />
+                    {this._renderShowHideButton()}
                 </ul>
             </nav>
         );
+    },
+
+    componentDidMount: function () {
+        ConfigStore.addListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+        ConfigStore.removeListener(this._onChange);
+    },
+
+    _renderShowHideButton: function () {
+        if (this.state.sidebarEnabled) {
+            return <RightItem name="&#x25BC;" onClick={this._onShowHideClicked} />
+        }
+
+        return <RightItem name="&#x25B2;" onClick={this._onShowHideClicked} />
     },
 
     _onLoadClicked: function () {
@@ -47,5 +73,13 @@ module.exports = React.createClass({
 
     _onSaveClicked: function () {
         MenuActions.openSaveFilePrompt();
+    },
+
+    _onShowHideClicked: function () {
+        MenuActions.toggleShowHide();
+    },
+
+    _onChange: function () {
+        this.setState(getStateFromStore());
     }
 });

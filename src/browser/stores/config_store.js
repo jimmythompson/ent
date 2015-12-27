@@ -2,30 +2,21 @@ var EventEmitter = require("events").EventEmitter,
     Constants = require("../constants"),
     dispatcher = require("../dispatcher");
 
-var CHANGE_EVENT = "tree-changed";
+var CHANGE_EVENT = "config-changed";
 var eventEmitter = new EventEmitter();
 
 var _state = {
-    tree: [
-        "= Break into house",
-        "== Through the door",
-        "=== Smash door",
-        "=== Pick lock",
-        "== Through the window"
-    ].join("\n")
+    showSidebar: true
 };
 
 var dispatchToken = dispatcher.register(function (action) {
     switch (action.type) {
-        case Constants.FileLoaded: {
-            _state.tree = action.contents;
+        case Constants.SidebarToggled: {
+            _state.showSidebar = !_state.showSidebar;
             break;
         }
-        case Constants.TreeChanged: {
-            _state.tree = action.tree;
-            break;
-        }
-        default: {
+        default:
+        {
             return;
         }
     }
@@ -36,8 +27,8 @@ var dispatchToken = dispatcher.register(function (action) {
 module.exports = {
     dispatchToken: dispatchToken,
 
-    getTree: function () {
-        return _state.tree;
+    isSidebarEnabled: function () {
+        return _state.showSidebar;
     },
 
     addListener(callback) {
