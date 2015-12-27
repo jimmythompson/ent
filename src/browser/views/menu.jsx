@@ -33,7 +33,7 @@ module.exports = React.createClass({
             <nav role="navigation">
                 <ul className="icon-bar">
                     <LeftItem id="load" name="Load" onClick={this._onLoadClicked} />
-                    <LeftItem id="save" name="Save" onClick={this._onLoadClicked} />
+                    <LeftItem id="save" name="Save" onClick={this._onSaveClicked} />
                     <LeftItem id="export" name="Export" onClick={this._onLoadClicked} />
                     <RightItem id="show-hide" name="&#x25BC;" />
                 </ul>
@@ -43,5 +43,9 @@ module.exports = React.createClass({
 
     _onLoadClicked: function () {
         MenuActions.openLoadFilePrompt();
+    },
+
+    _onSaveClicked: function () {
+        MenuActions.openSaveFilePrompt();
     }
 });
