@@ -53,14 +53,28 @@ gulp.task("copy-source", [ "clean" ], function () {
 
 gulp.task("build-source", [ "clean" ], function () {
     return gulp
-        .src("src/browser/index.js")
+        .src("src/browser/main.jsx")
         .pipe(gulpWebpack({
             output: {
                 filename: "bundle.js"
             },
+            resolve: {
+                extensions: [ '', '.js', '.jsx' ]
+            },
+            module: {
+                loaders: [{
+                    test: /\.jsx?$/,
+                    loader: 'babel',
+                    exclude: /node_modules/,
+                    query: {
+                        presets: ['react', 'es2015']
+                    }
+                }]
+            },
             plugins: [
                 new webpack.ProvidePlugin([
-                    'd3'
+                    'd3',
+                    'react'
                 ])
             ],
             target: "atom"
