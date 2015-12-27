@@ -1,4 +1,5 @@
 var React = require("react"),
+    LinkedStateMixin = require('react-addons-linked-state-mixin'),
     TreeStore = require("../stores/tree_store");
 
 var getStateFromStore = function () {
@@ -8,6 +9,8 @@ var getStateFromStore = function () {
 };
 
 module.exports = React.createClass({
+    mixins: [ LinkedStateMixin ],
+
     propTypes: {
         onGenerateButtonPressed: React.PropTypes.func.isRequired
     },
@@ -19,7 +22,7 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
-                <textarea id="text-area" defaultValue={this.state.content} ref="text"/>
+                <textarea id="text-area" valueLink={this.linkState('content')} ref="text"/>
                 <button id="generate" className="button-primary" onClick={this._onGenerateButtonPressed}>Generate</button>
             </div>
         );
