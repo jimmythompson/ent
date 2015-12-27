@@ -23,9 +23,18 @@ module.exports = React.createClass({
             <div>
                 <Menu />
                 {this._renderSidebar()}
-                <Canvas />
+                <Canvas ref="canvas"/>
             </div>
         );
+    },
+
+    componentDidMount: function () {
+        IpcActions.initBindings();
+        ConfigStore.addListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+        ConfigStore.removeListener(this._onChange);
     },
 
     _renderSidebar: function () {
@@ -36,15 +45,6 @@ module.exports = React.createClass({
 
     _changeTree: function (tree) {
         TreeActions.changeTree(tree);
-    },
-
-    componentDidMount: function () {
-        IpcActions.initBindings();
-        ConfigStore.addListener(this._onChange);
-    },
-
-    componentWillUnmount: function () {
-        ConfigStore.removeListener(this._onChange);
     },
 
     _onChange: function () {

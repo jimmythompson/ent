@@ -45,6 +45,7 @@ module.exports = React.createClass({
                 <ul className="icon-bar">
                     <LeftItem id="load" name="Load" onClick={this._onLoadClicked} />
                     <LeftItem id="save" name="Save" onClick={this._onSaveClicked} />
+                    <LeftItem id="export" name="Export" onClick={this._onExportClicked} />
                     {this._renderShowHideButton()}
                 </ul>
             </nav>
@@ -73,6 +74,10 @@ module.exports = React.createClass({
 
     _onSaveClicked: function () {
         MenuActions.openSaveFilePrompt();
+    },
+
+    _onExportClicked: function() {
+        MenuActions.exportFilePrompt();
     },
 
     _onShowHideClicked: function () {

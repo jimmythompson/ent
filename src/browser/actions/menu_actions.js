@@ -1,6 +1,7 @@
 var ipc = require("ipc"),
     dispatcher = require("../dispatcher"),
     Constants = require("../constants"),
+    CanvasStore = require("../stores/canvas_store"),
     TreeStore = require("../stores/tree_store");
 
 module.exports = {
@@ -10,6 +11,10 @@ module.exports = {
 
     openSaveFilePrompt: function () {
         ipc.send("dialog:save", TreeStore.getTree());
+    },
+
+    exportFilePrompt: function () {
+        ipc.send("dialog:export", CanvasStore.getCanvasHTML());
     },
 
     toggleShowHide: function () {
