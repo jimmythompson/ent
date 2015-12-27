@@ -17,6 +17,10 @@ var _state = {
 
 var dispatchToken = appDispatcher.register(function (action) {
     switch (action.type) {
+        case Constants.FileLoaded: {
+            _state.tree = action.contents;
+            break;
+        }
         case Constants.TreeChanged: {
             _state.tree = action.tree;
             break;

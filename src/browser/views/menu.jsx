@@ -1,14 +1,15 @@
-var React = require("react");
+var React = require("react"),
+    MenuActions = require("../actions/menu_actions");
 
 var LeftItem = React.createClass({
     propTypes: {
-        id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired
+        name: React.PropTypes.string.isRequired,
+        onClick: React.PropTypes.func.isRequired
     },
 
     render: function () {
         return (
-            <li><a id="{this.props.id}">{this.props.name}</a></li>
+            <li><a onClick={this.props.onClick}>{this.props.name}</a></li>
         );
     }
 });
@@ -16,12 +17,12 @@ var LeftItem = React.createClass({
 var RightItem = React.createClass({
     propTypes: {
         id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired
+        name: React.PropTypes.string.isRequired,
     },
 
     render: function () {
         return (
-            <li style={{float: 'right'}}><a id="{this.props.id}">{this.props.name}</a></li>
+            <li style={{float: 'right'}}><a onClick={this.props.onClick}>{this.props.name}</a></li>
         );
     }
 });
@@ -31,12 +32,16 @@ module.exports = React.createClass({
         return (
             <nav role="navigation">
                 <ul className="icon-bar">
-                    <LeftItem id="load" name="Load" />
-                    <LeftItem id="save" name="Save" />
-                    <LeftItem id="export" name="Export" />
+                    <LeftItem id="load" name="Load" onClick={this._onLoadClicked} />
+                    <LeftItem id="save" name="Save" onClick={this._onLoadClicked} />
+                    <LeftItem id="export" name="Export" onClick={this._onLoadClicked} />
                     <RightItem id="show-hide" name="&#x25BC;" />
                 </ul>
             </nav>
         );
+    },
+
+    _onLoadClicked: function () {
+        MenuActions.openLoadFilePrompt();
     }
 });

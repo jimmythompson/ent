@@ -1,3 +1,4 @@
 module.exports = {
-    TreeChanged: 'tree-changed'
+    TreeChanged: 'tree-changed',
+    FileLoaded: 'file-loaded'
 };

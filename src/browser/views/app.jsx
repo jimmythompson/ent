@@ -1,10 +1,10 @@
 var React = require("react"),
-    TreeActions = require("../actions/tree_actions");
+    TreeActions = require("../actions/tree_actions"),
+    IpcActions = require("../actions/ipc_actions");
 
 var Canvas = require('./canvas'),
     Menu = require("./menu"),
     Sidebar = require("./sidebar");
-
 
 module.exports = React.createClass({
     render: function () {
@@ -19,5 +19,9 @@ module.exports = React.createClass({
 
     _changeTree: function (tree) {
         TreeActions.changeTree(tree);
+    },
+
+    componentDidMount: function () {
+        IpcActions.initBindings();
     }
 });
