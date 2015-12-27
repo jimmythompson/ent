@@ -1,4 +1,5 @@
-var React = require("react");
+var React = require("react"),
+    TreeActions = require("../actions/tree_actions");
 
 var Canvas = require('./canvas'),
     Menu = require("./menu"),
@@ -10,9 +11,13 @@ module.exports = React.createClass({
         return (
             <div>
                 <Menu />
-                <Sidebar />
+                <Sidebar onTextAreaChanged={this._changeTree}/>
                 <Canvas />
             </div>
         );
+    },
+
+    _changeTree: function (tree) {
+        TreeActions.changeTree(tree);
     }
 });

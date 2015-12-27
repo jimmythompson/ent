@@ -1,10 +1,12 @@
-var EventEmitter = require("events").EventEmitter;
+var EventEmitter = require("events").EventEmitter,
+    Constants = require("../constants"),
+    appDispatcher = require("../dispatcher");
 
 var CHANGE_EVENT = "tree-changed";
 var eventEmitter = new EventEmitter();
 
 var _state = {
-    content: [
+    tree: [
         "= Break into house",
         "== Through the door",
         "=== Smash door",
@@ -13,13 +15,26 @@ var _state = {
     ].join("\n")
 };
 
-module.exports = {
-    getContent: function () {
-        return _state.content;
-    },
+var dispatchToken = appDispatcher.register(function (action) {
+    switch (action.type) {
+        case Constants.TreeChanged: {
+            _state.tree = action.tree;
+            break;
+        }
+        default: {
+            return;
+        }
+    }
 
-    setContent: function (content) {
-        _state.content = content;
+    eventEmitter.emit(CHANGE_EVENT);
+    return true;
+});
+
+module.exports = {
+    dispatchToken: dispatchToken,
+
+    getTree: function () {
+        return _state.tree;
     },
 
     addListener(callback) {

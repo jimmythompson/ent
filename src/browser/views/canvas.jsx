@@ -6,7 +6,7 @@ var React = require("react"),
 
 var getStateFromStore = function () {
     return {
-        content: TreeStore.getContent()
+        tree: TreeStore.getTree()
     };
 };
 
@@ -39,7 +39,7 @@ module.exports = React.createClass({
     _drawTree: function () {
         try {
             var $content = ReactDOM.findDOMNode(this);
-            renderTree($content, parser.parse(this.state.content));
+            renderTree($content, parser.parse(this.state.tree));
         } catch (error) {
             console.log(error);
         }

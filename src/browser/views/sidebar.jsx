@@ -3,11 +3,15 @@ var React = require("react"),
 
 var getStateFromStore = function () {
     return {
-        content: TreeStore.getContent()
+        content: TreeStore.getTree()
     };
 };
 
 module.exports = React.createClass({
+    propTypes: {
+        onTextAreaChanged: React.PropTypes.func.isRequired
+    },
+
     getInitialState: function () {
         return getStateFromStore();
     },
@@ -15,10 +19,13 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div className="sidebar">
-                <textarea id="text-area" value={this.state.content} onChange={function () {}} />
-                <button id="generate" className="button-primary">Generate</button>
+                <textarea id="text-area" defaultValue={this.state.content} onChange={this._onTextAreaChanged} />
             </div>
         );
+    },
+
+    _onTextAreaChanged: function (event) {
+        this.props.onTextAreaChanged(event.target.value);
     },
 
     componentDidMount: function () {
