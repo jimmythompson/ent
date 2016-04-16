@@ -1,7 +1,7 @@
 var clean = require("gulp-clean"),
     gulpNpmFiles = require("gulp-npm-files"),
     gulp = require("gulp"),
-    gulpWebpack = require("gulp-webpack"),
+    gulpWebpack = require("webpack-stream"),
     less = require("gulp-less"),
     mocha = require("gulp-mocha"),
     rename = require("gulp-rename"),
