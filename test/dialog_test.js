@@ -3,16 +3,20 @@ var proxyquire = require("proxyquire").noCallThru(),
     sinon = require("sinon");
 
 describe('dialogs', function () {
-    var mockGetFocusedWindow = sinon.stub().returns("");
-
     describe("#openFile", function () {
         var mockShowOpenDialog = sinon.stub().returns([""]),
             mockReadFileSync = sinon.stub().returns("My File!");
 
         var dialogs = proxyquire("../src/app/dialog", {
-            dialog: { showOpenDialog: mockShowOpenDialog },
-            fs: { readFileSync: mockReadFileSync },
-            "browser-window": { getFocusedWindow: mockGetFocusedWindow }
+            electron: {
+                BrowserWindow: {
+                    getFocusedWindow: sinon.stub().returns("")
+                },
+                dialog: {
+                    showOpenDialog: mockShowOpenDialog
+                }
+            },
+            fs: { readFileSync: mockReadFileSync }
         });
 
         it("should open the file from the dialog and return the contents", function () {
@@ -39,9 +43,15 @@ describe('dialogs', function () {
             mockWriteFileSync = sinon.stub();
 
         var dialogs = proxyquire("../src/app/dialog", {
-            dialog: { showSaveDialog: mockShowSaveDialog },
-            fs: { writeFileSync: mockWriteFileSync },
-            "browser-window": { getFocusedWindow: mockGetFocusedWindow }
+            electron: {
+                BrowserWindow: {
+                    getFocusedWindow: sinon.stub().returns("")
+                },
+                dialog: {
+                    showSaveDialog: mockShowSaveDialog
+                }
+            },
+            fs: { writeFileSync: mockWriteFileSync }
         });
 
         it("should save the file given by the dialog and return true", function () {
