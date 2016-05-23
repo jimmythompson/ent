@@ -1,7 +1,7 @@
 {
   "name": "ent",
   "description": "An attack tree visualisation tool",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "webpack-stream": "^3.1.0"
   },
   "scripts": {
-    "package": "electron-packager build Ent --asar --platform=darwin --arch=x64 --version=0.27.2 --app-version=0.2.0 --out=bin --icon=doc/logo.icns",
+    "package": "electron-packager build Ent --asar --platform=darwin --arch=x64 --version=1.1.1 --app-version=0.2.1 --out=bin --icon=doc/logo.icns",
     "start": "electron build 2>&1"
   }
 }

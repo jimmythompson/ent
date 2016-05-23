@@ -45,6 +45,7 @@ module.exports = React.createClass({
     _drawTree: function () {
         try {
             var $content = ReactDOM.findDOMNode(this);
+            console.log("Tree: ", this.state.tree);
             renderTree($content, parser.parse(this.state.tree), this._onInteraction);
         } catch (error) {
             console.log(error);

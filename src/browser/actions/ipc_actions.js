@@ -4,7 +4,7 @@ var ipc = require("electron").ipcRenderer,
 
 module.exports = {
     initBindings: function () {
-        ipc.on("open:success", function(fileContents) {
+        ipc.on("open:success", function(event, fileContents) {
             dispatcher.dispatch({
                 type: Constants.FileLoaded,
                 contents: fileContents
