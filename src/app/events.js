@@ -1,4 +1,4 @@
-var ipc = require('ipc');
+var ipc = require('electron').ipcMain;
 var dialogs = require("./dialog");
 
 ipc.on("dialog:open", function (event) {

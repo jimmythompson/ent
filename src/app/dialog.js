@@ -1,6 +1,7 @@
+var electron = require("electron");
 var fs = require("fs");
-var dialog = require("dialog");
-var BrowserWindow = require("browser-window");
+var dialog = electron.dialog;
+var BrowserWindow = electron.BrowserWindow;
 
 module.exports.openFile = function () {
     var fileNames = dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {

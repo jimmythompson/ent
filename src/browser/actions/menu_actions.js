@@ -1,4 +1,4 @@
-var ipc = require("ipc"),
+var ipc = require("electron").ipcRenderer,
     dispatcher = require("../dispatcher"),
     Constants = require("../constants"),
     CanvasStore = require("../stores/canvas_store"),
